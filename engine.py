@@ -82,7 +82,7 @@ def test_step(model: torch.nn.Module,
     model.eval()
     
     # Initialize test loss and test accuracy
-    
+    test_loss, test_acc = 0, 0
     # Inference context manager
     with torch.inference_mode():
         for batch, (X, y) in enumerate(dataloader):
