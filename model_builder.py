@@ -23,15 +23,17 @@ class FraudDetectionModel(nn.Module):
                       out_features=hidden_units),
             nn.ReLU(),
             nn.BatchNorm1d(num_features=hidden_units),
+            nn.Dropout(0.2),
             nn.Linear(in_features=hidden_units, 
                       out_features=hidden_units),
             nn.ReLU(),
             nn.BatchNorm1d(num_features=hidden_units),
+            nn.Dropout(0.2),
             nn.Linear(in_features=hidden_units, 
                       out_features=hidden_units),
             nn.ReLU(),
             nn.BatchNorm1d(num_features=hidden_units),
-            nn.Dropout(0.25),
+            nn.Dropout(0.2),
             nn.Linear(in_features=hidden_units, 
                       out_features=output_shape)
         )
