@@ -4,7 +4,7 @@ Contains functions for training and testing a PyTorch model.
 import torch
 from tqdm.auto import tqdm
 from typing import Tuple, Dict, List
-
+import torch.optim.lr_scheduler
 
 
 def train_step(model: torch.nn.Module,
@@ -112,7 +112,8 @@ def train(model: torch.nn.Module,
           optimizer: torch.optim.Optimizer,
           loss_fn: torch.nn.Module,
           epochs: int,
-          device: torch.device) -> Dict[str, List]:
+          device: torch.device,
+          scheduler: torch.optim.lr_scheduler) -> Dict[str, List]:
     
     """ Trains ans tests a PyTorch model.
     Calculates, prints and stores evaluation metrics throughout.
@@ -125,6 +126,7 @@ def train(model: torch.nn.Module,
         loss_fn (torch.nn.Module): A PyTorch loss function to calculate loss.
         epochs (int): Number of epochs to train the model for.
         device (torch.device): A target device to train and test on (e.g. "cuda" or "cpu").
+        scheduler ()
         
     Returns:
         Dict[str, List]: A dictionary of training and testing metrics.
@@ -140,6 +142,8 @@ def train(model: torch.nn.Module,
                                            loss_fn=loss_fn,
                                            optimizer=optimizer,
                                            device=device)
+        
+        scheduler.step()
         
         test_loss, test_acc = test_step(model=model,
                                         dataloader=test_dataloader,
