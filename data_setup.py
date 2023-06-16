@@ -1,3 +1,6 @@
+"""
+Script for loading Pandas dataframes into PyTorch dataloaders.
+"""
 import torch
 import pandas
 from typing import Tuple
